@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clon de Instagram - Inicio de Sesión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fafafa;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #dbdbdb;
+            width: 300px;
+            text-align: center;
+            position: relative;
+        }
+        .logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            background-color: #fafafa;
+        }
+        button {
+            width: 95%;
+            padding: 10px;
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #007bb5;
+        }
+        .footer-text {
+            margin-top: 20px;
+            color: #8e8e8e;
+            font-size: 12px;
+        }
+        .decoracion {
+            position: absolute;
+            font-size: 18px;
+            color: #0095f6;
+            font-style: italic;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        #decoracion-usuario {
+            top: 10px;
+            left: 10px;
+        }
+        #decoracion-contrasena {
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo" class="logo">
+        <form id="loginForm">
+            <input type="text" id="usuario" placeholder="Teléfono, usuario o correo" required>
+            <input type="password" id="contrasena" placeholder="Contraseña" required>
+            <button type="submit">Iniciar sesión</button>
+        </form>
+        <div id="decoracion-usuario" class="decoracion"></div>
+        <div id="decoracion-contrasena" class="decoracion"></div>
+        <div class="footer-text">
+            <p>¿No tienes una cuenta? Regístrate</p>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            const usuarioGuardado = localStorage.getItem("usuarioDecoracion");
+            const contrasenaGuardada = localStorage.getItem("contrasenaDecoracion");
+            if (usuarioGuardado) {
+                document.getElementById("decoracion-usuario").innerText = `Usuario: ${usuarioGuardado}`;
+            }
+            if (contrasenaGuardada) {
+                document.getElementById("decoracion-contrasena").innerText = `Contraseña: ${contrasenaGuardada}`;
+            }
+        };
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const usuario = document.getElementById("usuario").value;
+            const contrasena = document.getElementById("contrasena").value;
+            document.getElementById("decoracion-usuario").innerText = `Usuario: ${usuario}`;
+            document.getElementById("decoracion-contrasena").innerText = `Contraseña: ${contrasena}`;
+            localStorage.setItem("usuarioDecoracion", usuario);
+            localStorage.setItem("contrasenaDecoracion", contrasena);
+            document.getElementById("usuario").value = "";
+            document.getElementById("contrasena").value = "";
+        });
+    </script>
+</body>
+</html>
